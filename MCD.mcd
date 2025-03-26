@@ -1,0 +1,10 @@
+Lieu: id_lieux, atmosphere, latitude, longitude, categori_route, surface
+Localisation, 11 [id_lieux] Accident, 11 Lieu: Date
+
+Accident: Num_acc, id_lieux, choc, gravite, securite, sens_circulation, collision
+
+Vehicule: id_vehicule, categorie_vehicule, moteur, manoeuvre
+Conducteur, 1N [Num_acc] Accident, 11 Vehicule
+
+Usager: id_usager, place_vehicule, sexe, annee_naissance
+Acteur, 11 [id_vehicule] Vehicule, 11 Usager
