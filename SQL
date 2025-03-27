@@ -1,0 +1,21 @@
+CREATE TABLE "usagers" (
+	"Num_Acc"	INTEGER,
+	"id_usager"	INTEGER,
+	"id_vehicule"	INTEGER,
+	"num_veh"	TEXT,
+	"place"	INTEGER,
+	"catégorie_usager"	INTEGER,
+	"gravité_blessure"	INTEGER,
+	"sexe"	INTEGER,
+	"année_naissance"	INTEGER,
+	"trajet"	INTEGER,
+	"secu_1"	INTEGER,
+	"secu_2"	INTEGER,
+	"secu_3"	INTEGER,
+	"localisation_piéton"	INTEGER,
+	"action_piéton"	INTEGER,
+	"etat_piéton"	INTEGER,
+	PRIMARY KEY("Num_Acc","id_usager"),
+	FOREIGN KEY("id_vehicule") REFERENCES "",
+	FOREIGN KEY("num_veh") REFERENCES ""
+);
