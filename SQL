@@ -19,3 +19,15 @@ CREATE TABLE "usagers" (
 	FOREIGN KEY("id_vehicule") REFERENCES "",
 	FOREIGN KEY("num_veh") REFERENCES ""
 );
+CREATE TABLE "vehicule" (
+	"Num_Acc"	INTEGER,
+	"id_vehicule"	INTEGER,
+	"num_veh"	TEXT,
+	"sens_circulation"	INTEGER,
+	"catégorie_vehicule"	INTEGER,
+	"obstacle_fixe"	INTEGER,
+	"obstacle_mobile"	INTEGER,
+	"point_de_choc"	INTEGER,
+	"motorisation"	INTEGER,
+	PRIMARY KEY("Num_Acc","id_vehicule")
+);
