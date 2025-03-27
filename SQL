@@ -31,3 +31,21 @@ CREATE TABLE "vehicule" (
 	"motorisation"	INTEGER,
 	PRIMARY KEY("Num_Acc","id_vehicule")
 );
+CREATE TABLE "caractèristiques" (
+	"Num_Acc"	INTEGER,
+	"jour"	INTEGER,
+	"mois"	INTEGER,
+	"an"	INTEGER,
+	"heure"	TIME,
+	"luminosité"	INTEGER,
+	"departement"	INTEGER,
+	"commune"	INTEGER,
+	"agglomération"	INTEGER,
+	"intersection"	INTEGER,
+	"cond_atmosphériques"	INTEGER,
+	"type_de_collision"	INTEGER,
+	"adresse"	TEXT,
+	"latitude"	REAL,
+	"longitude"	REAL,
+	PRIMARY KEY("Num_Acc")
+);
