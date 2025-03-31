@@ -91,20 +91,20 @@ CREATE TABLE IF NOT EXISTS vehicule (
 cursor.execute("""
 CREATE TABLE IF NOT EXISTS lieu (
     Num_Acc	INTEGER,
-	catégorie_route	INTEGER,
+	catr INTEGER,
 	voie TEXT,
 	v1	INTEGER,
 	v2	TEXT,
-	régime_circulation	INTEGER,
-	nombre_de_voie	INTEGER,
+	circ	INTEGER,
+	nbv	INTEGER,
 	vosp	INTEGER,
-	profil_route	INTEGER,
+	prof	INTEGER,
 	pr	INTEGER,
 	pr1	INTEGER,
 	plan	INTEGER,
 	lartpc	INTEGER,
 	larrout	INTEGER,
-	etat_surface	INTEGER,
+	surf	INTEGER,
 	infra	INTEGER,
 	situ	INTEGER,
 	vma	INTEGER,
@@ -140,5 +140,46 @@ CREATE TABLE IF NOT EXISTS caract (
 # Enregistrement des modifications
 conn.commit()
 
+
+
+# INSERTION SQL
+
+
+# Insertion dans la table 'vehicule'
+for donnee in donnees1:
+    if len(donnee) == 9: 
+        cursor.execute("""
+            INSERT INTO vehicule (Num_Acc, id_vehicule, num_veh, sens_circulation, catégorie_vehicule, obstacle_fixe, obstacle_mobile, point_de_choc, motorisation)
+            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
+        """, donnee)  
+# Insertion dans la table 'usager'
+for donnee in donnees2:
+    if len(donnee) == 15: 
+        cursor.execute("""
+            INSERT INTO usager (Num_Acc, id_usager, id_vehicule, num_veh, place, catégorie_usager, gravité_blessure, sexe, année_naissance, trajet, secu_1, secu_2, secu_3, localisation_piéton, action_piéton, etat_piéton)
+            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+        """, donnee)
+
+# Insertion dans la table 'lieu'
+for donnee in donnees3:
+    if len(donnee) == 18:  
+        cursor.execute("""
+            INSERT INTO lieu (Num_Acc, catr, voie, v1, v2, circ, nbv, vosp, prof, pr, pr1, plan, lartpc, larrout, surf, infra, situ, vma)
+            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+        """, donnee)
+
+# Insertion dans la table 'caract'
+for donnee in donnees4:
+    if len(donnee) == 15:  
+        cursor.execute("""
+            INSERT INTO caract (Num_Acc, jour, mois, an, heure, luminosité, departement, commune, agglomération, intersection, cond_atmosphériques, type_de_collision, adresse, latitude, longitude)
+            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+        """, donnee)
+        
+        
+        
+        
+
+                 
 # Fermeture de la connexion
 conn.close()
