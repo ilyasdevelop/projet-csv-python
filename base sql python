@@ -1,0 +1,144 @@
+import csv
+import sqlite3
+
+# Ouverture des CSV et initialisation des listes
+donnees1 = []
+donnees2 = []
+donnees3 = []
+donnees4 = []
+
+
+# Ouverture du fichier vehicules-2023.csv
+with open('vehicules-2023.csv', newline='') as csvfile:
+    spamreader = csv.reader(csvfile, delimiter=' ', quotechar='|')
+    for row in spamreader:
+        donnees1.append(row)
+
+        
+# Ouverture du fichier usagers-2023.csv
+with open('usagers-2023.csv', newline='') as csvfile:
+    spamreader = csv.reader(csvfile, delimiter=' ', quotechar='|')
+    for row in spamreader:
+        donnees2.append(row)
+       
+# Ouverture du fichier lieux-2023.csv       
+with open('lieux-2023.csv', newline='') as csvfile:
+    spamreader = csv.reader(csvfile, delimiter=' ', quotechar='|')
+    for row in spamreader:
+        donnees3.append(row)
+        
+# Ouverture du fichier caract-2023.csv        
+with open('caract-2023.csv', newline='') as csvfile:
+    spamreader = csv.reader(csvfile, delimiter=' ', quotechar='|')
+    for row in spamreader:
+        donnees4.append(row)
+        
+# Vérification contenue        
+print(donnees1[0])
+print(donnees2[0])
+print(donnees3[0])
+print(donnees4[0])
+
+# Connexion à la base de données SQLite
+conn = sqlite3.connect('accidents.db')
+cursor = conn.cursor()
+
+
+# Création des tables
+cursor.execute("""
+CREATE TABLE IF NOT EXISTS usager (
+    Num_Acc INTEGER,
+    id_usager INTEGER,
+    id_vehicule INTEGER,
+    num_veh TEXT,
+    place INTEGER,
+    catégorie_usager INTEGER,
+    gravité_blessure INTEGER,
+    sexe INTEGER,
+    année_naissance INTEGER,
+    trajet INTEGER,
+    secu_1 INTEGER,
+    secu_2 INTEGER,
+    secu_3 INTEGER,
+    localisation_piéton INTEGER,
+    action_piéton INTEGER,
+    etat_piéton INTEGER,
+    PRIMARY KEY(Num_Acc, id_usager),
+    FOREIGN KEY(id_vehicule) REFERENCES vehicule(id_veh),
+    FOREIGN KEY(num_veh) REFERENCES vehicule(num_veh)
+)
+""")
+
+# Table 'vehicule' (exemple de structure pour une table de véhicules)
+cursor.execute("""
+CREATE TABLE IF NOT EXISTS vehicule (
+    Num_Acc	INTEGER,
+	id_vehicule	INTEGER,
+	num_veh	TEXT,
+	sens_circulation	INTEGER,
+	catégorie_vehicule	INTEGER,
+	obstacle_fixe	INTEGER,
+	obstacle_mobile	INTEGER,
+	point_de_choc	INTEGER,
+	motorisation	INTEGER,
+	PRIMARY KEY(Num_Acc,id_vehicule)
+)
+""")
+
+
+
+# Table 'lieu' (structure de base)
+cursor.execute("""
+CREATE TABLE IF NOT EXISTS lieu (
+    Num_Acc	INTEGER,
+	catégorie_route	INTEGER,
+	voie TEXT,
+	v1	INTEGER,
+	v2	TEXT,
+	régime_circulation	INTEGER,
+	nombre_de_voie	INTEGER,
+	vosp	INTEGER,
+	profil_route	INTEGER,
+	pr	INTEGER,
+	pr1	INTEGER,
+	plan	INTEGER,
+	lartpc	INTEGER,
+	larrout	INTEGER,
+	etat_surface	INTEGER,
+	infra	INTEGER,
+	situ	INTEGER,
+	vma	INTEGER,
+	PRIMARY KEY(Num_Acc)
+)
+""")
+
+
+
+# Table 'caractere' (structure de base)
+cursor.execute("""
+CREATE TABLE IF NOT EXISTS caract (
+    Num_Acc	INTEGER,
+    jour INTEGER,
+    mois INTEGER,
+    an	INTEGER,
+    heure TIME,
+    luminosité	INTEGER,
+    departement	INTEGER,
+    commune	INTEGER,
+    agglomération	INTEGER,
+    intersection INTEGER,
+    cond_atmosphériques	INTEGER,
+    type_de_collision	INTEGER,
+    adresse	TEXT,
+    latitude REAL,
+    longitude	REAL,
+    PRIMARY KEY("Num_Acc")
+                   )
+               
+               """)
+
+# Enregistrement des modifications
+conn.commit()
+
+# Fermeture de la connexion
+conn.close()
