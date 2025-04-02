@@ -14,8 +14,8 @@ Ce projet a été développé dans le cadre scolaire et permet de transformer de
 
 ## Prérequis
 - Python 3.8 ou version ultérieure
-- Bibliothèques requises (voir le fichier `requirements.txt`)
-
+- Bibliothèques requises :
+-    tkinter, customtkinter, os, CTKLisbox, sqlite3, pandas
 ## Installation
 1. Clonez ce dépôt sur votre machine locale :
 ```bash
