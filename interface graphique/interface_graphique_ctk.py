@@ -1,3 +1,10 @@
+# -*- coding: utf-8 -*-
+"""
+Created on Wed Apr  2 10:19:10 2025
+
+@author: arthur.loret
+"""
+
 import sys
 sys.path.append(r"C:\Users\Arthur.Loret\AppData\Roaming\Python\Python312\site-packages")
 import customtkinter as ctk
@@ -5,9 +12,6 @@ import customtkinter as ctk
 from tkinter import filedialog, messagebox
 import sqlite3
 import pandas as pd
-
-
-
 
 # Initialiser le mode sombre par défaut
 ctk.set_appearance_mode("dark")  # "dark" ou "light"
@@ -34,10 +38,10 @@ def execute_query():
     try:
         cursor.execute(query)
         rows = cursor.fetchall()
-        columns = [desc[0] for desc in cursor.description]
+        columns = [desc[0] for desc in cursor.description] 
         
         # Effacer l'ancien affichage
-        for row in tree.get_children():
+        for row in tree.winfo_children():  # Correcte la méthode utilisée pour obtenir les enfants
             tree.delete(row)
         
         # Mettre à jour les colonnes du Treeview
@@ -98,6 +102,11 @@ tree_scroll.pack(side="right", fill="y")
 tree = ctk.CTkScrollableFrame(tree_frame)
 tree.pack(fill="both", expand=True)
 
+# **Correction :**
+# Si vous voulez changer la couleur ou la configuration du Treeview (frame scrollable), utilisez les options suivantes :
+
+tree.configure(fg_color="gray")  # Exemple de configuration correcte
+
 # Commutateur de mode (Dark/Light)
 switch_var = ctk.StringVar(value="Off")
 mode_switch = ctk.CTkSwitch(root, text="Mode clair", variable=switch_var, onvalue="On", offvalue="Off", command=toggle_mode)
@@ -109,3 +118,4 @@ root.mainloop()
 # Fermer la connexion à la base de données si elle existe
 if 'conn' in globals():
     conn.close()
+
