@@ -1,6 +1,6 @@
 -- Nombre total d'accidents par année
 SELECT an, COUNT(*) AS nombre_accidents
-FROM caractèristiques
+FROM caract
 GROUP BY an
 ORDER BY an;
 
