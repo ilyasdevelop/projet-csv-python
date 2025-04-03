@@ -5,12 +5,9 @@ Ce projet a été développé dans le cadre scolaire et permet de transformer de
 
 ## Fonctionnalités
 - Import de fichiers CSV de différents formats
-- Prévisualisation des données avant conversion
 - Paramétrage des types de données pour chaque colonne
 - Création automatique de schémas de base de données
-- Conversion et stockage dans plusieurs formats de base de données (SQLite, MySQL, PostgreSQL)
-- Interface graphique intuitive pour une utilisation sans connaissances techniques avancées
-- Historique des conversions effectuées
+- Interface graphique intuitive pour executer des requetes sql
 
 ## Prérequis
 - Python 3.8 ou version ultérieure
