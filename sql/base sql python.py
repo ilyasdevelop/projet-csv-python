@@ -8,43 +8,66 @@ donnees3 = []
 donnees4 = []
 
 try:
-    # Ouverture du fichier vehicules-2023.csv
-    with open('vehicules-2023.csv', newline='', encoding='latin1') as csvfile:
-        # Modification du délimiteur - les fichiers CSV français utilisent généralement ";" comme délimiteur
-        csvreader = csv.reader(csvfile, delimiter=';')
-        header = next(csvreader)  # Lecture et saut de l'en-tête
-        for row in csvreader:
+    # Lecture des fichiers CSV
+    with open('vehicules-2023.csv', newline='', encoding='utf-8') as csvfile:
+        reader = csv.reader(csvfile, delimiter=';')
+        header1 = next(reader)
+        for row in reader:
             donnees1.append(row)
     print(f"Lecture de vehicules-2023.csv terminée : {len(donnees1)} lignes")
-        
-    # Ouverture du fichier usagers-2023.csv
-    with open('usagers-2023.csv', newline='', encoding='latin1') as csvfile:
-        csvreader = csv.reader(csvfile, delimiter=';')
-        header = next(csvreader)  # Lecture et saut de l'en-tête
-        for row in csvreader:
+
+    with open('usagers-2023.csv', newline='', encoding='utf-8') as csvfile:
+        reader = csv.reader(csvfile, delimiter=';')
+        header2 = next(reader)
+        for row in reader:
             donnees2.append(row)
     print(f"Lecture de usagers-2023.csv terminée : {len(donnees2)} lignes")
-       
-    # Ouverture du fichier lieux-2023.csv       
-    with open('lieux-2023.csv', newline='', encoding='latin1') as csvfile:
-        csvreader = csv.reader(csvfile, delimiter=';')
-        header = next(csvreader)  # Lecture et saut de l'en-tête
-        for row in csvreader:
+
+    with open('lieux-2023.csv', newline='', encoding='utf-8') as csvfile:
+        reader = csv.reader(csvfile, delimiter=';')
+        header3 = next(reader)
+        for row in reader:
             donnees3.append(row)
     print(f"Lecture de lieux-2023.csv terminée : {len(donnees3)} lignes")
-        
-    # Ouverture du fichier caract-2023.csv        
-    with open('caract-2023.csv', newline='', encoding='latin1') as csvfile:
-        csvreader = csv.reader(csvfile, delimiter=';')
-        header = next(csvreader)  # Lecture et saut de l'en-tête
-        for row in csvreader:
+
+    with open('caract-2023.csv', newline='', encoding='utf-8') as csvfile:
+        reader = csv.reader(csvfile, delimiter=';')
+        header4 = next(reader)
+        for row in reader:
             donnees4.append(row)
     print(f"Lecture de caract-2023.csv terminée : {len(donnees4)} lignes")
+
+    # Connexion à la base SQLite
+    conn = sqlite3.connect('accidents.db')
+    cursor = conn.cursor()
+
+    # Fonction générique pour créer une table et insérer les données
+    def creer_et_inserer(nom_table, header, donnees):
+        colonnes = ', '.join([f'"{col}" TEXT' for col in header])
+        cursor.execute(f"DROP TABLE IF EXISTS {nom_table}")
+        cursor.execute(f"CREATE TABLE {nom_table} ({colonnes})")
+        placeholders = ', '.join(['?'] * len(header))
+        cursor.executemany(f"INSERT INTO {nom_table} VALUES ({placeholders})", donnees)
+        print(f" Table {nom_table} créée et {len(donnees)} lignes insérées")
+
+    # Création et insertion pour chaque table
+    creer_et_inserer("vehicule", header1, donnees1)
+    creer_et_inserer("usager", header2, donnees2)
+    creer_et_inserer("lieu", header3, donnees3)
+    creer_et_inserer("caract", header4, donnees4)
+
+    # Vérification (exemple pour vehicule)
+    cursor.execute("SELECT COUNT(*) FROM vehicule")
+    print("Nombre de lignes dans vehicule :", cursor.fetchone()[0])
+
+    conn.commit()
+    conn.close()
+
+except Exception as e:
+    print(" Erreur :", e)
+
 except FileNotFoundError as e:
     print(f"Erreur : Fichier non trouvé - {e}")
-    exit(1)
-except Exception as e:
-    print(f"Erreur lors de la lecture des fichiers CSV : {e}")
     exit(1)
         
 # Vérification du contenu (échantillons)
