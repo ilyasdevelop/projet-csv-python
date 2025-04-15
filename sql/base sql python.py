@@ -9,7 +9,7 @@ donnees4 = []
 
 try:
     # Ouverture du fichier vehicules-2023.csv
-    with open('vehicules-2023.csv', newline='', encoding='utf-8') as csvfile:
+    with open('vehicules-2023.csv', newline='', encoding='latin1') as csvfile:
         # Modification du délimiteur - les fichiers CSV français utilisent généralement ";" comme délimiteur
         csvreader = csv.reader(csvfile, delimiter=';')
         header = next(csvreader)  # Lecture et saut de l'en-tête
@@ -18,7 +18,7 @@ try:
     print(f"Lecture de vehicules-2023.csv terminée : {len(donnees1)} lignes")
         
     # Ouverture du fichier usagers-2023.csv
-    with open('usagers-2023.csv', newline='', encoding='utf-8') as csvfile:
+    with open('usagers-2023.csv', newline='', encoding='latin1') as csvfile:
         csvreader = csv.reader(csvfile, delimiter=';')
         header = next(csvreader)  # Lecture et saut de l'en-tête
         for row in csvreader:
@@ -26,7 +26,7 @@ try:
     print(f"Lecture de usagers-2023.csv terminée : {len(donnees2)} lignes")
        
     # Ouverture du fichier lieux-2023.csv       
-    with open('lieux-2023.csv', newline='', encoding='utf-8') as csvfile:
+    with open('lieux-2023.csv', newline='', encoding='latin1') as csvfile:
         csvreader = csv.reader(csvfile, delimiter=';')
         header = next(csvreader)  # Lecture et saut de l'en-tête
         for row in csvreader:
@@ -34,7 +34,7 @@ try:
     print(f"Lecture de lieux-2023.csv terminée : {len(donnees3)} lignes")
         
     # Ouverture du fichier caract-2023.csv        
-    with open('caract-2023.csv', newline='', encoding='utf-8') as csvfile:
+    with open('caract-2023.csv', newline='', encoding='latin1') as csvfile:
         csvreader = csv.reader(csvfile, delimiter=';')
         header = next(csvreader)  # Lecture et saut de l'en-tête
         for row in csvreader:
@@ -71,12 +71,13 @@ try:
         Num_Acc INTEGER,
         id_vehicule INTEGER,
         num_veh TEXT,
-        sens_circulation INTEGER,
-        catégorie_vehicule INTEGER,
-        obstacle_fixe INTEGER,
-        obstacle_mobile INTEGER,
-        point_de_choc INTEGER,
-        motorisation INTEGER,
+        senc INTEGER,
+        catv INTEGER,
+        obs INTEGER,
+        obsm INTEGER,
+        choc INTEGER,
+        manv INTEGER
+        motor INTEGER,
         PRIMARY KEY(Num_Acc, id_vehicule)
     )
     """)
@@ -89,17 +90,17 @@ try:
         id_vehicule INTEGER,
         num_veh TEXT,
         place INTEGER,
-        catégorie_usager INTEGER,
-        gravité_blessure INTEGER,
+        catu INTEGER,
+        grav INTEGER,
         sexe INTEGER,
-        année_naissance INTEGER,
+        an_nais INTEGER,
         trajet INTEGER,
-        secu_1 INTEGER,
-        secu_2 INTEGER,
-        secu_3 INTEGER,
-        localisation_piéton INTEGER,
-        action_piéton INTEGER,
-        etat_piéton INTEGER,
+        secu1 INTEGER,
+        secu2 INTEGER,
+        secu3 INTEGER,
+        locp INTEGER,
+        actp INTEGER,
+        etap INTEGER,
         PRIMARY KEY(Num_Acc, id_usager),
         FOREIGN KEY(Num_Acc, id_vehicule) REFERENCES vehicule(Num_Acc, id_vehicule)
     )
@@ -137,17 +138,17 @@ try:
         jour INTEGER,
         mois INTEGER,
         an INTEGER,
-        heure TEXT,
-        luminosité INTEGER,
-        departement INTEGER,
-        commune INTEGER,
-        agglomération INTEGER,
-        intersection INTEGER,
-        cond_atmosphériques INTEGER,
-        type_de_collision INTEGER,
-        adresse TEXT,
-        latitude REAL,
-        longitude REAL,
+        hrmn TIME,
+        lum INTEGER,
+        dep INTEGER,
+        com INTEGER,
+        agg INTEGER,
+        int INTEGER,
+        atm INTEGER,
+        col INTEGER,
+        adr TEXT,
+        lat REAL,
+        long REAL,
         PRIMARY KEY(Num_Acc)
     )
     """)
@@ -171,8 +172,8 @@ try:
                     int(donnee[8]) if donnee[8] and donnee[8].strip() else None   # motorisation
                 ]
                 cursor.execute("""
-                    INSERT INTO vehicule (Num_Acc, id_vehicule, num_veh, sens_circulation, catégorie_vehicule, obstacle_fixe, obstacle_mobile, point_de_choc, motorisation)
-                    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
+                    INSERT INTO vehicule (Num_Acc, id_vehicule, num_veh, senc, catv, obs, obsm, choc, manv, motor)
+                    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
                 """, values)
                 insertion_reussie += 1
         except Exception as e:
@@ -207,7 +208,7 @@ try:
                     int(donnee[15]) if len(donnee) > 15 and donnee[15] and donnee[15].strip() else None  # etat_piéton
                 ]
                 cursor.execute("""
-                    INSERT INTO usager (Num_Acc, id_usager, id_vehicule, num_veh, place, catégorie_usager, gravité_blessure, sexe, année_naissance, trajet, secu_1, secu_2, secu_3, localisation_piéton, action_piéton, etat_piéton)
+                    INSERT INTO usager (Num_Acc, id_usager, id_vehicule, num_veh, place, catu, grav, sexe, an_nais, trajet, secu1, secu2, secu3, locp, actp, etap)
                     VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
                 """, values)
                 insertion_reussie += 1
@@ -280,7 +281,7 @@ try:
                     float(donnee[14].replace(',', '.')) if donnee[14] and donnee[14].strip() else None   # longitude
                 ]
                 cursor.execute("""
-                    INSERT INTO caract (Num_Acc, jour, mois, an, heure, luminosité, departement, commune, agglomération, intersection, cond_atmosphériques, type_de_collision, adresse, latitude, longitude)
+                    INSERT INTO caract (Num_Acc, jour, mois, an, hrmn, lum, dep, com, agg, int, atm, col, adr, lat, long)
                     VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
                 """, values)
                 insertion_reussie += 1
@@ -322,7 +323,7 @@ try:
     print("\nExemples d'usagers:")
     for row in cursor.fetchall():
         print(row)
-        
+            
     cursor.execute("SELECT * FROM lieu LIMIT 3")  
     print("\nExemples de lieux:")
     for row in cursor.fetchall():
