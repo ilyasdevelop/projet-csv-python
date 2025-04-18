@@ -1,44 +1,45 @@
-# Accident Database Analysis Tool
+Outil d'Analyse de Base de Données d'Accidents
 
-This project provides a graphical interface for analyzing accident data stored in a SQLite database.
+Ce projet fournit une interface graphique pour analyser les données d'accidents stockées dans une base de données SQLite.
+Installation
 
-## Setup
+    Installez les dépendances nécessaires :
 
-1. Install the required dependencies:
-   ```
-   pip install -r requirements.txt
-   ```
+pip install -r requirements.txt
 
-2. Place your CSV data files in the `csv` directory:
-   - `vehicules-2023.csv`
-   - `usagers-2023.csv`
-   - `lieux-2023.csv`
-   - `caract-2023.csv`
+Placez vos fichiers de données CSV dans le répertoire csv :
 
-3. Initialize the database:
-   ```
-   python "sql/base sql python.py"
-   ```
+    vehicules-2023.csv
 
-## Usage
+    usagers-2023.csv
 
-1. Launch the graphical interface:
-   ```
-   python "interface graphique/interface_graphique_ctk.py"
-   ```
+    lieux-2023.csv
 
-2. Select the database file (`accidents.db`) when prompted.
+    caract-2023.csv
 
-3. Enter SQL queries in the text area and click "Execute" to run them.
+Initialisez la base de données :
 
-4. Use the light/dark mode toggle to switch between themes.
+    python "sql/base sql python.py"
 
-## Sample Queries
+Utilisation
 
-The `sql/requetes.sql` file contains sample queries that can be used to analyze the accident data.
+    Lancez l'interface graphique :
 
-## Troubleshooting
+    python "interface graphique/interface_graphique_ctk.py"
 
-- If you encounter issues with the CSV files, ensure they are properly formatted with semicolon (;) as the delimiter.
-- Make sure all required dependencies are installed.
-- Check that the database file exists and is accessible.
+    Sélectionnez le fichier de base de données (accidents.db) lorsqu'il vous est demandé.
+
+    Entrez des requêtes SQL dans la zone de texte et cliquez sur "Exécuter" pour les lancer.
+
+    Utilisez le bouton de basculement mode clair/sombre pour changer de thème.
+
+Exemples de Requêtes
+
+Le fichier sql/requetes.sql contient des exemples de requêtes qui peuvent être utilisées pour analyser les données d'accidents.
+Dépannage
+
+    Si vous rencontrez des problèmes avec les fichiers CSV, assurez-vous qu'ils sont correctement formatés avec un point-virgule (;) comme séparateur.
+
+    Vérifiez que toutes les dépendances requises sont installées.
+
+    Contrôlez que le fichier de base de données existe et est accessible.
