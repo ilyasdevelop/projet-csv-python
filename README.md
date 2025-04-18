@@ -1,68 +1,44 @@
-# CSV to Database Converter
+# Accident Database Analysis Tool
 
-## Description du projet
-Ce projet a été développé dans le cadre scolaire et permet de transformer des fichiers CSV en base de données relationnelle. L'application dispose d'une interface graphique facilitant la manipulation et la conversion des données.
+This project provides a graphical interface for analyzing accident data stored in a SQLite database.
 
-## Fonctionnalités
-- Import de fichiers CSV de différents formats
-- Paramétrage des types de données pour chaque colonne
-- Création automatique de schémas de base de données
-- Interface graphique intuitive pour executer des requetes sql
+## Setup
 
-## Prérequis
-- Python 3.8 ou version ultérieure
-- Bibliothèques requises :
--    tkinter, customtkinter, os, CTKLisbox, sqlite3, pandas
-## Installation
-1. Clonez ce dépôt sur votre machine locale :
-```bash
-git clone https://github.com/votre-nom/csv-to-database.git
-cd csv-to-database
-```
+1. Install the required dependencies:
+   ```
+   pip install -r requirements.txt
+   ```
 
-2. Créez et activez un environnement virtuel (recommandé) :
-```bash
-python -m venv env
-source env/bin/activate  # Sur Windows: env\Scripts\activate
-```
+2. Place your CSV data files in the `csv` directory:
+   - `vehicules-2023.csv`
+   - `usagers-2023.csv`
+   - `lieux-2023.csv`
+   - `caract-2023.csv`
 
-3. Installez les dépendances :
-```bash
-pip install -r requirements.txt
-```
+3. Initialize the database:
+   ```
+   python "sql/base sql python.py"
+   ```
 
-## Utilisation
-1. Lancez l'application :
-```bash
-python main.py
-```
+## Usage
 
-2. Dans l'interface graphique :
-   - Cliquez sur "Importer un fichier CSV"
-   - Configurez les paramètres de conversion
-   - Prévisualisez les données
-   - Sélectionnez le type de base de données cible
-   - Lancez la conversion
+1. Launch the graphical interface:
+   ```
+   python "interface graphique/interface_graphique_ctk.py"
+   ```
 
-## Structure du projet
-```
-csv-to-database/
-├── main.py             # Point d'entrée de l'application
-├── requirements.txt    # Dépendances du projet
-├── src/
-│   ├── gui/            # Modules de l'interface graphique
-│   ├── parsers/        # Analyseurs pour différents formats CSV
-│   ├── converters/     # Convertisseurs vers différentes bases de données
-│   └── utils/          # Fonctions utilitaires
-├── tests/              # Tests unitaires et d'intégration
-└── doc/                # Documentation
-```
+2. Select the database file (`accidents.db`) when prompted.
 
-## Contribution
-Ce projet a été développé dans le cadre d'un cours de [nom du cours]. Les contributions sont les bienvenues sous forme de pull requests, en particulier pour :
-- Ajouter le support de nouveaux formats de bases de données
-- Améliorer l'interface utilisateur
-- Optimiser les performances de conversion
+3. Enter SQL queries in the text area and click "Execute" to run them.
 
-## Licence
-Ce projet est distribué sous licence MIT. Voir le fichier `LICENSE` pour plus de détails.
+4. Use the light/dark mode toggle to switch between themes.
+
+## Sample Queries
+
+The `sql/requetes.sql` file contains sample queries that can be used to analyze the accident data.
+
+## Troubleshooting
+
+- If you encounter issues with the CSV files, ensure they are properly formatted with semicolon (;) as the delimiter.
+- Make sure all required dependencies are installed.
+- Check that the database file exists and is accessible.

@@ -1,0 +1,192 @@
+2025-04-18 19:04:07,262 - INFO - Starting database import process
+2025-04-18 19:04:07,294 - INFO - Database created/connected successfully
+2025-04-18 19:04:07,294 - INFO - 
+Processing lieux-2023.csv...
+2025-04-18 19:04:07,294 - INFO - Reading C:\Users\gamin\Documents\CODE\projet-csv-python-main\csv\lieux-2023.csv with 18 columns: ['Num_Acc', 'catr', 'voie', 'v1', 'v2', 'circ', 'nbv', 'vosp', 'prof', 'pr', 'pr1', 'plan', 'lartpc', 'larrout', 'surf', 'infra', 'situ', 'vma']
+2025-04-18 19:04:07,294 - INFO - Processing 100 rows for lieu
+2025-04-18 19:04:07,304 - INFO - Successfully committed 100 rows to lieu
+2025-04-18 19:04:07,304 - INFO - Loaded 100 rows into lieu table
+2025-04-18 19:04:07,304 - INFO - 
+Processing caract-2023.csv...
+2025-04-18 19:04:07,304 - INFO - Reading C:\Users\gamin\Documents\CODE\projet-csv-python-main\csv\caract-2023.csv with 15 columns: ['Num_Acc', 'jour', 'mois', 'an', 'hrmn', 'lum', 'dep', 'com', 'agg', 'int', 'atm', 'col', 'adr', 'lat', 'long']
+2025-04-18 19:04:07,304 - INFO - Processing 100 rows for caract
+2025-04-18 19:04:07,309 - INFO - Successfully committed 100 rows to caract
+2025-04-18 19:04:07,309 - INFO - Loaded 100 rows into caract table
+2025-04-18 19:04:07,309 - INFO - 
+Processing vehicules-2023.csv...
+2025-04-18 19:04:07,310 - INFO - Reading C:\Users\gamin\Documents\CODE\projet-csv-python-main\csv\vehicules-2023.csv with 10 columns: ['Num_Acc', 'id_vehicule', 'num_veh', 'senc', 'catv', 'obs', 'obsm', 'choc', 'manv', 'motor']
+2025-04-18 19:04:07,310 - INFO - Processing 100 rows for vehicule
+2025-04-18 19:04:07,313 - INFO - Successfully committed 100 rows to vehicule
+2025-04-18 19:04:07,313 - INFO - Loaded 100 rows into vehicule table
+2025-04-18 19:04:07,313 - INFO - 
+Processing usagers-2023.csv...
+2025-04-18 19:04:07,313 - INFO - Reading C:\Users\gamin\Documents\CODE\projet-csv-python-main\csv\usagers-2023.csv with 16 columns: ['Num_Acc', 'id_usager', 'id_vehicule', 'num_veh', 'place', 'catu', 'grav', 'sexe', 'an_nais', 'trajet', 'secu1', 'secu2', 'secu3', 'locp', 'actp', 'etap']
+2025-04-18 19:04:07,313 - INFO - Processing 150 rows for usager
+2025-04-18 19:04:07,313 - INFO - Found 100 existing vehicle records
+2025-04-18 19:04:07,314 - WARNING - Inconsistent vehicle numbers for Acc=16, ID=2: VEH49 vs VEH12
+2025-04-18 19:04:07,314 - WARNING - Inconsistent vehicle numbers for Acc=88, ID=2: VEH36 vs VEH97
+2025-04-18 19:04:07,314 - WARNING - Inconsistent vehicle numbers for Acc=84, ID=1: VEH85 vs VEH32
+2025-04-18 19:04:07,314 - WARNING - Inconsistent vehicle numbers for Acc=49, ID=1: VEH96 vs VEH41
+2025-04-18 19:04:07,314 - WARNING - Inconsistent vehicle numbers for Acc=27, ID=3: VEH70 vs VEH43
+2025-04-18 19:04:07,314 - WARNING - Inconsistent vehicle numbers for Acc=44, ID=1: VEH41 vs VEH43
+2025-04-18 19:04:07,314 - WARNING - Inconsistent vehicle numbers for Acc=60, ID=1: VEH51 vs VEH9
+2025-04-18 19:04:07,314 - WARNING - Inconsistent vehicle numbers for Acc=28, ID=1: VEH97 vs VEH72
+2025-04-18 19:04:07,314 - WARNING - Inconsistent vehicle numbers for Acc=28, ID=1: VEH97 vs VEH80
+2025-04-18 19:04:07,314 - WARNING - Inconsistent vehicle numbers for Acc=20, ID=3: VEH49 vs VEH93
+2025-04-18 19:04:07,315 - WARNING - Inconsistent vehicle numbers for Acc=17, ID=1: VEH26 vs VEH25
+2025-04-18 19:04:07,315 - WARNING - Inconsistent vehicle numbers for Acc=84, ID=1: VEH85 vs VEH57
+2025-04-18 19:04:07,315 - WARNING - Inconsistent vehicle numbers for Acc=5, ID=2: VEH96 vs VEH68
+2025-04-18 19:04:07,315 - WARNING - Inconsistent vehicle numbers for Acc=47, ID=2: VEH76 vs VEH29
+2025-04-18 19:04:07,315 - WARNING - Inconsistent vehicle numbers for Acc=87, ID=3: VEH63 vs VEH40
+2025-04-18 19:04:07,315 - WARNING - Inconsistent vehicle numbers for Acc=86, ID=1: VEH72 vs VEH2
+2025-04-18 19:04:07,315 - WARNING - Inconsistent vehicle numbers for Acc=1, ID=3: VEH53 vs VEH33
+2025-04-18 19:04:07,315 - WARNING - Inconsistent vehicle numbers for Acc=60, ID=1: VEH51 vs VEH6
+2025-04-18 19:04:07,315 - WARNING - Inconsistent vehicle numbers for Acc=99, ID=3: VEH21 vs VEH74
+2025-04-18 19:04:07,315 - WARNING - Inconsistent vehicle numbers for Acc=52, ID=2: VEH38 vs VEH76
+2025-04-18 19:04:07,315 - WARNING - Inconsistent vehicle numbers for Acc=63, ID=3: VEH50 vs VEH65
+2025-04-18 19:04:07,315 - WARNING - Inconsistent vehicle numbers for Acc=43, ID=2: VEH28 vs VEH71
+2025-04-18 19:04:07,315 - WARNING - Inconsistent vehicle numbers for Acc=49, ID=1: VEH96 vs VEH73
+2025-04-18 19:04:07,315 - WARNING - Inconsistent vehicle numbers for Acc=63, ID=2: VEH99 vs VEH95
+2025-04-18 19:04:07,316 - WARNING - Inconsistent vehicle numbers for Acc=48, ID=3: VEH60 vs VEH77
+2025-04-18 19:04:07,316 - WARNING - Inconsistent vehicle numbers for Acc=3, ID=2: VEH78 vs VEH52
+2025-04-18 19:04:07,316 - WARNING - Inconsistent vehicle numbers for Acc=60, ID=1: VEH51 vs VEH72
+2025-04-18 19:04:07,316 - WARNING - Inconsistent vehicle numbers for Acc=4, ID=1: VEH53 vs VEH70
+2025-04-18 19:04:07,316 - WARNING - Inconsistent vehicle numbers for Acc=9, ID=1: VEH48 vs VEH4
+2025-04-18 19:04:07,316 - WARNING - Inconsistent vehicle numbers for Acc=17, ID=1: VEH26 vs VEH78
+2025-04-18 19:04:07,316 - WARNING - Inconsistent vehicle numbers for Acc=100, ID=2: VEH60 vs VEH9
+2025-04-18 19:04:07,316 - INFO - Found 119 unique required vehicle combinations
+2025-04-18 19:04:07,316 - INFO - Will create vehicle record: Acc=87, ID=2, Num=VEH98
+2025-04-18 19:04:07,316 - INFO - Will create vehicle record: Acc=75, ID=2, Num=VEH28
+2025-04-18 19:04:07,316 - INFO - Will update vehicle number: Acc=27, ID=3, Old=VEH27, New=VEH70
+2025-04-18 19:04:07,316 - INFO - Will update vehicle number: Acc=85, ID=3, Old=VEH85, New=VEH82
+2025-04-18 19:04:07,317 - INFO - Will create vehicle record: Acc=47, ID=1, Num=VEH80
+2025-04-18 19:04:07,317 - INFO - Will create vehicle record: Acc=5, ID=2, Num=VEH96
+2025-04-18 19:04:07,317 - INFO - Will update vehicle number: Acc=1, ID=3, Old=VEH1, New=VEH53
+2025-04-18 19:04:07,317 - INFO - Will create vehicle record: Acc=51, ID=3, Num=VEH76
+2025-04-18 19:04:07,317 - INFO - Will create vehicle record: Acc=22, ID=3, Num=VEH2
+2025-04-18 19:04:07,317 - INFO - Will create vehicle record: Acc=84, ID=1, Num=VEH85
+2025-04-18 19:04:07,317 - INFO - Will update vehicle number: Acc=13, ID=1, Old=VEH13, New=VEH20
+2025-04-18 19:04:07,317 - INFO - Will update vehicle number: Acc=91, ID=3, Old=VEH91, New=VEH72
+2025-04-18 19:04:07,317 - INFO - Will create vehicle record: Acc=88, ID=2, Num=VEH36
+2025-04-18 19:04:07,317 - INFO - Will update vehicle number: Acc=7, ID=3, Old=VEH7, New=VEH74
+2025-04-18 19:04:07,317 - INFO - Will create vehicle record: Acc=16, ID=2, Num=VEH49
+2025-04-18 19:04:07,317 - INFO - Will create vehicle record: Acc=86, ID=3, Num=VEH36
+2025-04-18 19:04:07,317 - INFO - Will create vehicle record: Acc=92, ID=2, Num=VEH95
+2025-04-18 19:04:07,317 - INFO - Will update vehicle number: Acc=3, ID=2, Old=VEH3, New=VEH78
+2025-04-18 19:04:07,317 - INFO - Will create vehicle record: Acc=6, ID=3, Num=VEH42
+2025-04-18 19:04:07,318 - INFO - Will create vehicle record: Acc=13, ID=3, Num=VEH51
+2025-04-18 19:04:07,318 - INFO - Will create vehicle record: Acc=18, ID=3, Num=VEH24
+2025-04-18 19:04:07,318 - INFO - Will update vehicle number: Acc=92, ID=1, Old=VEH92, New=VEH40
+2025-04-18 19:04:07,318 - INFO - Will create vehicle record: Acc=9, ID=1, Num=VEH48
+2025-04-18 19:04:07,318 - INFO - Will create vehicle record: Acc=28, ID=1, Num=VEH97
+2025-04-18 19:04:07,318 - INFO - Will create vehicle record: Acc=98, ID=1, Num=VEH48
+2025-04-18 19:04:07,318 - INFO - Will update vehicle number: Acc=45, ID=1, Old=VEH45, New=VEH10
+2025-04-18 19:04:07,318 - INFO - Will update vehicle number: Acc=87, ID=3, Old=VEH87, New=VEH63
+2025-04-18 19:04:07,318 - INFO - Will create vehicle record: Acc=37, ID=1, Num=VEH48
+2025-04-18 19:04:07,318 - INFO - Will update vehicle number: Acc=68, ID=2, Old=VEH68, New=VEH1
+2025-04-18 19:04:07,318 - INFO - Will create vehicle record: Acc=53, ID=3, Num=VEH20
+2025-04-18 19:04:07,318 - INFO - Will update vehicle number: Acc=47, ID=2, Old=VEH47, New=VEH76
+2025-04-18 19:04:07,319 - INFO - Will update vehicle number: Acc=14, ID=3, Old=VEH14, New=VEH75
+2025-04-18 19:04:07,319 - INFO - Will create vehicle record: Acc=21, ID=1, Num=VEH33
+2025-04-18 19:04:07,319 - INFO - Will create vehicle record: Acc=63, ID=2, Num=VEH99
+2025-04-18 19:04:07,319 - INFO - Will update vehicle number: Acc=44, ID=1, Old=VEH44, New=VEH41
+2025-04-18 19:04:07,319 - INFO - Will update vehicle number: Acc=62, ID=3, Old=VEH62, New=VEH36
+2025-04-18 19:04:07,319 - INFO - Will create vehicle record: Acc=86, ID=1, Num=VEH72
+2025-04-18 19:04:07,319 - INFO - Will create vehicle record: Acc=41, ID=3, Num=VEH23
+2025-04-18 19:04:07,319 - INFO - Will create vehicle record: Acc=49, ID=1, Num=VEH96
+2025-04-18 19:04:07,319 - INFO - Will update vehicle number: Acc=99, ID=3, Old=VEH99, New=VEH21
+2025-04-18 19:04:07,319 - INFO - Will create vehicle record: Acc=60, ID=1, Num=VEH51
+2025-04-18 19:04:07,320 - INFO - Will create vehicle record: Acc=12, ID=2, Num=VEH87
+2025-04-18 19:04:07,320 - INFO - Will create vehicle record: Acc=80, ID=3, Num=VEH76
+2025-04-18 19:04:07,320 - INFO - Will create vehicle record: Acc=57, ID=2, Num=VEH68
+2025-04-18 19:04:07,320 - INFO - Will update vehicle number: Acc=56, ID=2, Old=VEH56, New=VEH92
+2025-04-18 19:04:07,320 - INFO - Will update vehicle number: Acc=48, ID=2, Old=VEH48, New=VEH82
+2025-04-18 19:04:07,320 - INFO - Will update vehicle number: Acc=76, ID=3, Old=VEH76, New=VEH57
+2025-04-18 19:04:07,320 - INFO - Will update vehicle number: Acc=89, ID=3, Old=VEH89, New=VEH49
+2025-04-18 19:04:07,320 - INFO - Will create vehicle record: Acc=83, ID=3, Num=VEH96
+2025-04-18 19:04:07,320 - INFO - Will create vehicle record: Acc=81, ID=2, Num=VEH90
+2025-04-18 19:04:07,320 - INFO - Will update vehicle number: Acc=59, ID=2, Old=VEH59, New=VEH88
+2025-04-18 19:04:07,320 - INFO - Will create vehicle record: Acc=48, ID=3, Num=VEH60
+2025-04-18 19:04:07,320 - INFO - Will create vehicle record: Acc=97, ID=2, Num=VEH4
+2025-04-18 19:04:07,320 - INFO - Will update vehicle number: Acc=4, ID=2, Old=VEH4, New=VEH100
+2025-04-18 19:04:07,320 - INFO - Will create vehicle record: Acc=82, ID=2, Num=VEH39
+2025-04-18 19:04:07,320 - INFO - Will create vehicle record: Acc=20, ID=3, Num=VEH49
+2025-04-18 19:04:07,321 - INFO - Will create vehicle record: Acc=5, ID=1, Num=VEH85
+2025-04-18 19:04:07,321 - INFO - Will update vehicle number: Acc=54, ID=1, Old=VEH54, New=VEH89
+2025-04-18 19:04:07,321 - INFO - Will update vehicle number: Acc=5, ID=3, Old=VEH5, New=VEH84
+2025-04-18 19:04:07,321 - INFO - Will create vehicle record: Acc=17, ID=1, Num=VEH26
+2025-04-18 19:04:07,321 - INFO - Will create vehicle record: Acc=25, ID=3, Num=VEH95
+2025-04-18 19:04:07,321 - INFO - Will create vehicle record: Acc=56, ID=1, Num=VEH48
+2025-04-18 19:04:07,321 - INFO - Will create vehicle record: Acc=91, ID=2, Num=VEH17
+2025-04-18 19:04:07,321 - INFO - Will update vehicle number: Acc=50, ID=3, Old=VEH50, New=VEH16
+2025-04-18 19:04:07,321 - INFO - Will create vehicle record: Acc=4, ID=3, Num=VEH52
+2025-04-18 19:04:07,321 - INFO - Will create vehicle record: Acc=79, ID=1, Num=VEH7
+2025-04-18 19:04:07,321 - INFO - Will create vehicle record: Acc=14, ID=1, Num=VEH93
+2025-04-18 19:04:07,321 - INFO - Will create vehicle record: Acc=59, ID=1, Num=VEH86
+2025-04-18 19:04:07,321 - INFO - Will create vehicle record: Acc=42, ID=1, Num=VEH69
+2025-04-18 19:04:07,321 - INFO - Will create vehicle record: Acc=84, ID=3, Num=VEH35
+2025-04-18 19:04:07,321 - INFO - Will create vehicle record: Acc=6, ID=1, Num=VEH92
+2025-04-18 19:04:07,321 - INFO - Will create vehicle record: Acc=70, ID=2, Num=VEH79
+2025-04-18 19:04:07,321 - INFO - Will create vehicle record: Acc=40, ID=3, Num=VEH57
+2025-04-18 19:04:07,321 - INFO - Will update vehicle number: Acc=52, ID=2, Old=VEH52, New=VEH38
+2025-04-18 19:04:07,322 - INFO - Will create vehicle record: Acc=88, ID=1, Num=VEH55
+2025-04-18 19:04:07,322 - INFO - Will create vehicle record: Acc=43, ID=2, Num=VEH28
+2025-04-18 19:04:07,322 - INFO - Will create vehicle record: Acc=19, ID=3, Num=VEH45
+2025-04-18 19:04:07,322 - INFO - Will create vehicle record: Acc=23, ID=3, Num=VEH29
+2025-04-18 19:04:07,322 - INFO - Will create vehicle record: Acc=91, ID=1, Num=VEH31
+2025-04-18 19:04:07,322 - INFO - Will update vehicle number: Acc=28, ID=2, Old=VEH28, New=VEH10
+2025-04-18 19:04:07,322 - INFO - Will create vehicle record: Acc=44, ID=2, Num=VEH21
+2025-04-18 19:04:07,322 - INFO - Will update vehicle number: Acc=10, ID=1, Old=VEH10, New=VEH57
+2025-04-18 19:04:07,322 - INFO - Will create vehicle record: Acc=11, ID=3, Num=VEH52
+2025-04-18 19:04:07,322 - INFO - Will create vehicle record: Acc=63, ID=3, Num=VEH50
+2025-04-18 19:04:07,323 - INFO - Will update vehicle number: Acc=32, ID=1, Old=VEH32, New=VEH66
+2025-04-18 19:04:07,323 - INFO - Will create vehicle record: Acc=31, ID=1, Num=VEH96
+2025-04-18 19:04:07,323 - INFO - Will create vehicle record: Acc=25, ID=2, Num=VEH51
+2025-04-18 19:04:07,323 - INFO - Will update vehicle number: Acc=24, ID=2, Old=VEH24, New=VEH44
+2025-04-18 19:04:07,323 - INFO - Will update vehicle number: Acc=73, ID=3, Old=VEH73, New=VEH84
+2025-04-18 19:04:07,323 - INFO - Will create vehicle record: Acc=58, ID=2, Num=VEH100
+2025-04-18 19:04:07,323 - INFO - Will update vehicle number: Acc=95, ID=3, Old=VEH95, New=VEH33
+2025-04-18 19:04:07,323 - INFO - Will create vehicle record: Acc=73, ID=1, Num=VEH73
+2025-04-18 19:04:07,323 - INFO - Will update vehicle number: Acc=21, ID=2, Old=VEH21, New=VEH82
+2025-04-18 19:04:07,323 - INFO - Will update vehicle number: Acc=66, ID=3, Old=VEH66, New=VEH73
+2025-04-18 19:04:07,323 - INFO - Will update vehicle number: Acc=88, ID=3, Old=VEH88, New=VEH50
+2025-04-18 19:04:07,323 - INFO - Will create vehicle record: Acc=100, ID=2, Num=VEH60
+2025-04-18 19:04:07,323 - INFO - Will create vehicle record: Acc=68, ID=3, Num=VEH65
+2025-04-18 19:04:07,323 - INFO - Will create vehicle record: Acc=61, ID=2, Num=VEH35
+2025-04-18 19:04:07,323 - INFO - Will create vehicle record: Acc=40, ID=1, Num=VEH93
+2025-04-18 19:04:07,324 - INFO - Will update vehicle number: Acc=35, ID=2, Old=VEH35, New=VEH24
+2025-04-18 19:04:07,324 - INFO - Will create vehicle record: Acc=85, ID=1, Num=VEH84
+2025-04-18 19:04:07,324 - INFO - Will update vehicle number: Acc=53, ID=2, Old=VEH53, New=VEH35
+2025-04-18 19:04:07,324 - INFO - Will update vehicle number: Acc=75, ID=1, Old=VEH75, New=VEH38
+2025-04-18 19:04:07,324 - INFO - Will create vehicle record: Acc=4, ID=1, Num=VEH53
+2025-04-18 19:04:07,324 - INFO - Will update vehicle number: Acc=65, ID=1, Old=VEH65, New=VEH80
+2025-04-18 19:04:07,324 - INFO - Will create vehicle record: Acc=26, ID=1, Num=VEH11
+2025-04-18 19:04:07,324 - INFO - Will create vehicle record: Acc=32, ID=2, Num=VEH10
+2025-04-18 19:04:07,324 - INFO - Will create vehicle record: Acc=72, ID=2, Num=VEH42
+2025-04-18 19:04:07,324 - INFO - Will update vehicle number: Acc=82, ID=3, Old=VEH82, New=VEH57
+2025-04-18 19:04:07,324 - INFO - Will create vehicle record: Acc=35, ID=1, Num=VEH94
+2025-04-18 19:04:07,324 - INFO - Will create vehicle record: Acc=37, ID=2, Num=VEH24
+2025-04-18 19:04:07,324 - INFO - Will create vehicle record: Acc=36, ID=2, Num=VEH2
+2025-04-18 19:04:07,325 - INFO - Will update vehicle number: Acc=39, ID=2, Old=VEH39, New=VEH93
+2025-04-18 19:04:07,325 - INFO - Will create vehicle record: Acc=94, ID=1, Num=VEH71
+2025-04-18 19:04:07,325 - INFO - Will update vehicle number: Acc=49, ID=3, Old=VEH49, New=VEH88
+2025-04-18 19:04:07,325 - INFO - Will update vehicle number: Acc=2, ID=2, Old=VEH2, New=VEH62
+2025-04-18 19:04:07,325 - INFO - Will create vehicle record: Acc=75, ID=3, Num=VEH39
+2025-04-18 19:04:07,325 - INFO - Will create vehicle record: Acc=9, ID=2, Num=VEH12
+2025-04-18 19:04:07,325 - INFO - Will create vehicle record: Acc=72, ID=1, Num=VEH23
+2025-04-18 19:04:07,325 - INFO - Creating 76 missing vehicle records...
+2025-04-18 19:04:07,328 - INFO - Created 76 vehicle records
+2025-04-18 19:04:07,328 - INFO - Updating 43 vehicle numbers...
+2025-04-18 19:04:07,330 - INFO - Updated 43 vehicle records
+2025-04-18 19:04:07,333 - INFO - Successfully committed 150 rows to usager
+2025-04-18 19:04:07,333 - INFO - Loaded 150 rows into usager table
+2025-04-18 19:04:07,333 - INFO - 
+Total rows loaded: 450
+2025-04-18 19:04:07,333 - INFO - Total errors: 0
+2025-04-18 19:04:07,333 - INFO - 
+Final data statistics:
+2025-04-18 19:04:07,334 - INFO - Verified 100 rows in lieu table
+2025-04-18 19:04:07,334 - INFO - Verified 100 rows in caract table
+2025-04-18 19:04:07,334 - INFO - Verified 176 rows in vehicule table
+2025-04-18 19:04:07,334 - INFO - Verified 150 rows in usager table
+2025-04-18 19:04:07,335 - INFO - Database import completed successfully
