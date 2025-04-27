@@ -1,0 +1,275 @@
+import customtkinter as ctk
+from tkinter import ttk, filedialog, messagebox
+
+import sqlite3
+import pandas as pd
+import os
+
+# Initialiser le mode sombre par défaut
+ctk.set_appearance_mode("dark")
+ctk.set_default_color_theme("blue")
+
+# Variables globales
+conn = None
+cursor = None
+db_path = None
+
+# Fonction pour sélectionner la base de données
+def select_database():
+    global conn, cursor, db_path
+    db_path = filedialog.askopenfilename(title="Sélectionner une base de données SQLite", filetypes=[("SQLite Database", "*.db")])
+    if db_path:
+        try:
+            conn = sqlite3.connect(db_path)
+            cursor = conn.cursor()
+            db_name_label.configure(text=f"Base de données: {os.path.basename(db_path)}")
+            
+            # Afficher les tables disponibles
+            cursor.execute("SELECT name FROM sqlite_master WHERE type='table';")
+            tables = cursor.fetchall()
+            tables_list.delete(0, "end")
+            for table in tables:
+                tables_list.insert("end", table[0])
+            
+            messagebox.showinfo("Succès", f"Connexion réussie à {db_path}")
+        except Exception as e:
+            messagebox.showerror("Erreur de connexion", str(e))
+
+def show_table_structure():
+    """Affiche la structure de la table sélectionnée"""
+    if not conn:
+        messagebox.showwarning("Aucune connexion", "Veuillez d'abord sélectionner une base de données.")
+        return
+    
+    selected_table = tables_list.get(tables_list.curselection()) if tables_list.curselection() else None
+    if not selected_table:
+        messagebox.showwarning("Aucune table sélectionnée", "Veuillez sélectionner une table.")
+        return
+    
+    try:
+        cursor.execute(f"PRAGMA table_info({selected_table})")
+        columns = cursor.fetchall()
+        
+        # Préparer la requête pour l'affichage
+        query_entry.delete("1.0", "end")
+        query_entry.insert("1.0", f"SELECT * FROM {selected_table} LIMIT 100")
+        
+        # Afficher la structure dans une nouvelle fenêtre
+        structure_window = ctk.CTkToplevel(root)
+        structure_window.title(f"Structure de la table {selected_table}")
+        structure_window.geometry("500x400")
+        
+        info_text = ctk.CTkTextbox(structure_window, width=480, height=380)
+        info_text.pack(padx=10, pady=10)
+        
+        info_text.insert("1.0", f"Structure de la table {selected_table}:\n\n")
+        for col in columns:
+            info_text.insert("end", f"Colonne: {col[1]}\n")
+            info_text.insert("end", f"Type: {col[2]}\n")
+            info_text.insert("end", f"Nullable: {'Non' if col[3] == 0 else 'Oui'}\n")
+            info_text.insert("end", f"Défaut: {col[4]}\n")
+            info_text.insert("end", f"Clé primaire: {'Oui' if col[5] == 1 else 'Non'}\n\n")
+    except Exception as e:
+        messagebox.showerror("Erreur", str(e))
+
+def execute_query():
+    """Exécute une requête SQL saisie par l'utilisateur et affiche les résultats."""
+    if not conn:
+        messagebox.showwarning("Aucune connexion", "Veuillez d'abord sélectionner une base de données.")
+        return
+    
+    query = query_entry.get("1.0", "end").strip()
+    if not query:
+        messagebox.showwarning("Requête vide", "Veuillez saisir une requête SQL.")
+        return
+    
+    try:
+        cursor.execute(query)
+        
+        # Vérifier si c'est une requête SELECT ou une autre requête
+        if query.strip().upper().startswith("SELECT"):
+            rows = cursor.fetchall()
+            columns = [desc[0] for desc in cursor.description]
+            
+            # Effacer l'ancien affichage
+            for item in tree.get_children():
+                tree.delete(item)
+                
+            # Reconfigurer les colonnes
+            tree["columns"] = columns
+            tree["show"] = "headings"
+            
+            # Configurer les en-têtes de colonnes
+            for col in columns:
+                tree.heading(col, text=col)
+                tree.column(col, width=100)
+            
+            # Ajouter les données
+            for row in rows:
+                tree.insert("", "end", values=row)
+                
+            result_label.configure(text=f"{len(rows)} résultats affichés")
+        else:
+            # Pour les autres requêtes (INSERT, UPDATE, DELETE, etc.)
+            conn.commit()
+            result_label.configure(text=f"Opération terminée. {cursor.rowcount} lignes affectées.")
+    except Exception as e:
+        messagebox.showerror("Erreur SQL", str(e))
+
+def export_results():
+    """Exporte les résultats dans un fichier CSV"""
+    if not tree.get_children():
+        messagebox.showwarning("Aucun résultat", "Aucun résultat à exporter.")
+        return
+    
+    try:
+        # Obtenir les en-têtes
+        columns = tree["columns"]
+        
+        # Obtenir les données
+        data = []
+        for item in tree.get_children():
+            values = tree.item(item)["values"]
+            data.append(values)
+        
+        # Créer un DataFrame
+        df = pd.DataFrame(data, columns=columns)
+        
+        # Enregistrer en CSV
+        export_path = filedialog.asksaveasfilename(
+            defaultextension=".csv",
+            filetypes=[("CSV", "*.csv"), ("Excel", "*.xlsx")]
+        )
+        
+        if not export_path:
+            return
+            
+        if export_path.endswith('.csv'):
+            df.to_csv(export_path, index=False)
+        elif export_path.endswith('.xlsx'):
+            df.to_excel(export_path, index=False)
+            
+        messagebox.showinfo("Exportation réussie", f"Les résultats ont été exportés vers {export_path}")
+    except Exception as e:
+        messagebox.showerror("Erreur d'exportation", str(e))
+
+# Fonction pour basculer entre les modes
+def toggle_mode():
+    if switch_var.get() == "On":
+        ctk.set_appearance_mode("light")
+    else:
+        ctk.set_appearance_mode("dark")
+
+# Interface CustomTkinter
+root = ctk.CTk()
+root.title("SQLite Database Explorer")
+root.geometry("1200x700")
+
+# Structure principale avec deux colonnes
+main_frame = ctk.CTkFrame(root)
+main_frame.pack(fill="both", expand=True, padx=10, pady=10)
+
+# Panneau latéral (gauche)
+sidebar_frame = ctk.CTkFrame(main_frame, width=250)
+sidebar_frame.pack(side="left", fill="y", padx=5, pady=5)
+
+# Panneau principal (droite)
+content_frame = ctk.CTkFrame(main_frame)
+content_frame.pack(side="right", fill="both", expand=True, padx=5, pady=5)
+
+# --- PANNEAU LATÉRAL ---
+sidebar_label = ctk.CTkLabel(sidebar_frame, text="Explorer", font=("Arial", 16, "bold"))
+sidebar_label.pack(pady=10)
+
+# Bouton de sélection de base de données
+db_button = ctk.CTkButton(sidebar_frame, text="Sélectionner une base de données", command=select_database)
+db_button.pack(pady=5, padx=10, fill="x")
+
+# Affichage du nom de la base de données
+db_name_label = ctk.CTkLabel(sidebar_frame, text="Base de données: Aucune", font=("Arial", 12))
+db_name_label.pack(pady=5)
+
+# Liste des tables
+tables_frame = ctk.CTkFrame(sidebar_frame)
+tables_frame.pack(fill="both", expand=True, padx=5, pady=5)
+
+tables_label = ctk.CTkLabel(tables_frame, text="Tables disponibles:", anchor="w")
+tables_label.pack(anchor="w")
+
+tables_list = ctk.CTkTextbox(tables_frame, height=15)
+tables_list.pack(fill="both", expand=True, pady=5)
+
+# Bouton structure
+structure_button = ctk.CTkButton(sidebar_frame, text="Afficher la structure", command=show_table_structure)
+structure_button.pack(pady=5, padx=10, fill="x")
+
+# --- PANNEAU PRINCIPAL ---
+
+# Zone de saisie de requête
+query_frame = ctk.CTkFrame(content_frame)
+query_frame.pack(pady=5, fill="x")
+
+query_label = ctk.CTkLabel(query_frame, text="Requête SQL:", font=("Arial", 12))
+query_label.pack(anchor="w", padx=5)
+
+query_entry = ctk.CTkTextbox(query_frame, height=100, font=("Arial", 12))
+query_entry.pack(fill="x", padx=5, pady=5)
+
+# Boutons d'action
+button_frame = ctk.CTkFrame(content_frame)
+button_frame.pack(fill="x", pady=5)
+
+execute_button = ctk.CTkButton(button_frame, text="Exécuter", command=execute_query)
+execute_button.pack(side="left", padx=5)
+
+export_button = ctk.CTkButton(button_frame, text="Exporter les résultats", command=export_results)
+export_button.pack(side="left", padx=5)
+
+# Commutateur de mode (Dark/Light)
+switch_var = ctk.StringVar(value="Off")
+mode_switch = ctk.CTkSwitch(button_frame, text="Mode clair", variable=switch_var, 
+                           onvalue="On", offvalue="Off", command=toggle_mode)
+mode_switch.pack(side="right", padx=5)
+
+# Label pour les résultats
+result_label = ctk.CTkLabel(content_frame, text="Aucun résultat", font=("Arial", 12))
+result_label.pack(anchor="w", padx=5, pady=5)
+
+# Table d'affichage avec scrollbar (utilisant ttk.Treeview)
+tree_frame = ctk.CTkFrame(content_frame)
+tree_frame.pack(fill="both", expand=True, padx=5, pady=5)
+
+# Utiliser ttk.Treeview au lieu de CTkScrollableFrame pour afficher des données tabulaires
+tree_scroll_y = ctk.CTkScrollbar(tree_frame, orientation="vertical")
+tree_scroll_y.pack(side="right", fill="y")
+
+tree_scroll_x = ctk.CTkScrollbar(tree_frame, orientation="horizontal")
+tree_scroll_x.pack(side="bottom", fill="x")
+
+# Créer le Treeview avec un style compatible avec le mode sombre
+style = ttk.Style()
+style.theme_use("clam")  # Un thème qui fonctionne bien avec le mode sombre
+
+# Configurer les couleurs du Treeview pour le mode sombre
+style.configure("Treeview", 
+                background="#2a2d2e", 
+                foreground="white", 
+                fieldbackground="#2a2d2e")
+style.configure("Treeview.Heading", 
+                background="#1f6aa5", 
+                foreground="white")
+
+tree = ttk.Treeview(tree_frame)
+tree.pack(fill="both", expand=True)
+
+# Connecter les scrollbars au Treeview
+tree.configure(yscrollcommand=tree_scroll_y.set, xscrollcommand=tree_scroll_x.set)
+tree_scroll_y.configure(command=tree.yview)
+tree_scroll_x.configure(command=tree.xview)
+
+# Lancer l'application
+root.mainloop()
+
+# Fermer la connexion à la base de données si elle existe
+if conn:
+    conn.close()
